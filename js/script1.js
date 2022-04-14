@@ -8,7 +8,7 @@
 //number = 70;
 //console.log(number);
 
-//null - не существует
+//null - не существует  
 //undefined - существует но не задано значение
 
 //let number = 5.076;
