@@ -13,3 +13,4 @@
 //git remote add origin https://github.com/Mokalenko/Test_Project.git
 //git branch -M main
 //git push -u origin main
+//git clone + url git hab
