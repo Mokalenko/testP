@@ -12,5 +12,6 @@
 //…or push an existing repository from the command line
 //git remote add origin https://github.com/Mokalenko/Test_Project.git
 //git branch -M main
+//git pull
 //git push -u origin main
 //git clone + url git hab
