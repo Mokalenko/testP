@@ -112,4 +112,3 @@ if (hamburger >=3 && !cola || fries >1 && nuggets){
 let jonReport, samReport, marinaReport = 'done';
 
 console.log(jonReport || samReport || marinaReport);
-
