@@ -66,6 +66,62 @@ const logger = function(){
 
 logger();
 
-const calc2 = (a,b) => {return a+b};
+const calc2 = (a,b) => {return a+b;};
 
 console.log(calc2(1,5));
+//!!! урок 26
+function convert(among,curr){
+   let num = curr*among;
+   return num;
+}
+
+console.log(convert(33,31));
+
+// !! практика 27
+// 1
+// function sayHello(text) {
+//    console.log("Привет, "+text+"!");
+// }
+
+function sayHello(text) {
+  return `Привет, ${text}!`;
+}
+console.log(sayHello("Антон"));
+
+// 2
+function returnNeighboringNumbers(num) {
+   const arr = [];
+   arr[0] = num - 1;
+   arr[1] = num;
+   arr[2] = num + 1;
+
+   return arr;
+}
+
+console.log(returnNeighboringNumbers(5));
+
+// 3
+
+function getMathResult(num1,num2) {
+
+   if (typeof(num2)==='string' || num2<=0){
+      return num1;
+   }
+
+   let res = '';
+   let myNum = 0;
+
+   for (let i = 1; i<= num2; i++){
+      myNum = myNum+num1;
+      if (i===num2){
+         res += `${myNum}`;
+      }else{
+       res += `${myNum}---`;
+      }
+   }
+   return res;
+}
+// console.log(getMathResult(5,3));
+// console.log(getMathResult(3,10));
+// console.log(getMathResult(10,0));
+console.log(getMathResult(10,'5'));
