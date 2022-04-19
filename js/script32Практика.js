@@ -171,3 +171,74 @@ function showProgrammingLangs(plan) {
    return res;
 }
 console.log(showProgrammingLangs(personalPlanPeter));
+
+// практика написания кода 11
+const family = ['Peter', 'Ann', 'Alex', 'Linda'];
+
+function showFamily(arr) {
+
+  if (arr.length ===0){
+     return "Семя пустая";
+  }else{
+      let res = "Семя состоит из: ";
+
+      for (let i=0;i<arr.length;i++){
+         res += `${arr[i]} `;
+      }
+      return res;
+  }  
+}
+
+console.log(showFamily([]));
+console.log(showFamily(family));
+
+
+const favoriteCities = ['liSBon', 'ROME', 'miLan', 'Dublin'];
+
+function standardizeStrings(arr) {
+   let string = '';
+   for (let i=0;i<arr.length;i++){
+      string = arr[i];
+      console.log(string.toLocaleLowerCase());
+   } 
+}
+
+console.log(standardizeStrings(favoriteCities));
+
+// практика написания кода 12
+const someString = 'This is some strange string';
+
+function reverse(str) {
+  
+   if (typeof(str) !== 'string'){
+      return "Ошибка!";
+   }else{
+      let res = '';
+      for (let i = str.length;i>0;i--){
+         res +=str.substring(i-1,i);
+      }
+      return res;
+   }
+}
+console.log(reverse(someString));
+
+const baseCurrencies = ['USD', 'EUR'];
+const additionalCurrencies = ['UAH', 'RUB', 'CNY'];
+
+function availableCurr(arr, missingCurr) {
+ 
+   if (arr.length==0){
+      return 'Нет доступных валют';
+   }else{
+      let res = 'Доступные валюты:\n';
+      for (let i = 0;i<arr.length;i++){
+         if(arr[i] !==missingCurr){
+            res +=`${i+1} - ${arr[i]}\n`;
+         }  
+      }
+      return res;
+   }
+}
+let testArr = [];
+console.log(availableCurr(['UAH', 'RUB', 'CNY'],'CNY'));
+console.log(availableCurr(testArr,'CNY'));
