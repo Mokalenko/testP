@@ -29,7 +29,7 @@ const req = new Promise(function(resolve,reject){
         resolve(product);
     },2000);
 });
-
+  
 // resolve (положительный ответ обработки данных) обрабатывает then
 req.then((product)=>{
     return new Promise((resolve,reject)=>{
