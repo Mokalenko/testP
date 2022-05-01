@@ -257,3 +257,105 @@ console.log(order("4of Fo1r pe6ople g3ood th5e the2"));
 // if(arr[0]==0){delete arr[0]}
 // if(arr[arr.length]==0){delete arr[arr.length]]}
 // return 
+
+// 10
+// Write a function, which takes a non-negative integer (seconds) as input and returns the time in a human-readable format (HH:MM:SS)
+
+// HH = hours, padded to 2 digits, range: 00 - 99
+// MM = minutes, padded to 2 digits, range: 00 - 59
+// SS = seconds, padded to 2 digits, range: 00 - 59
+// The maximum time never exceeds 359999 (99:59:59)
+function humanReadable (seconds) {
+    if(seconds >= 359999) {
+        return '99:59:59';
+    }
+
+    const myDate = new Date(seconds*1000);
+   
+    let dh = (myDate.getUTCDate()-1)*24,
+        h = ''+(myDate.getUTCHours()+dh),
+        m = ''+myDate.getUTCMinutes(),
+        s = ''+myDate.getUTCSeconds();
+    return `${h.length==1 ? '0'+h : h}:${m.length==1 ? '0'+m : m}:${s.length==1 ? '0'+s : s}`;
+}
+console.log(humanReadable(86400)); // '00:00:00'
+
+console.log(humanReadable(359999)); // '99:59:59'
+console.log(humanReadable(45296)); // '12:34:56'
+console.log(humanReadable(90)); // '00:01:30'
+console.log(humanReadable(0)); // '00:00:00'
+
+// 11
+// Write a function that when given a URL as a string, parses out just the domain name and returns it as a string. For example:
+
+// * url = "http://github.com/carbonfive/raygun" -> domain name = "github"
+// * url = "http://www.zombie-bites.com"         -> domain name = "zombie-bites"
+// * url = "https://www.cnet.com"                -> domain name = cnet"
+
+function domainName(url){
+    let res = url.replace('https://','');
+    res = res.replace('http://','');
+    res = res.replace('www.','');
+    let lastInd = res.indexOf('.');
+    res = res.slice(0,lastInd);
+    return res.trim();
+}
+
+console.log(domainName("http://google.com"));//, "google");
+console.log(domainName("http://google.co.jp"));//, "google");
+console.log(domainName("www.xakep.ru"));// "xakep"));//;
+console.log(domainName("https://youtube.com"));// "youtube");
+
+// 12
+
+function sumStrings(a,b) { 
+    var n = Math.max(a.length, b.length)
+
+    a = a.padStart(n, 0)
+    b = b.padStart(n, 0)
+  
+    var res = Array(n), d = 0
+  
+    for (var q=n-1; ~q; --q) {
+      if ((res[q] = d + +a[q] + +b[q]) > 9) {
+        d = 1, res[q] -= 10;
+      } else {
+        d = 0;
+      }
+    }
+    
+    if (d) {
+      res.unshift(1)
+    }
+    
+    return res.join("");
+    
+}
+
+// (BigInt(a) + BigInt(b)).toString();!!!!!
+
+console.log(sumStrings('712569312664357328695151392', '8100824045303269669937'));
+console.log(sumStrings('123','456'));
+
+// 13
+function sumStrings(string) { 
+    let nString = '';
+    let nambString = ''+string.replace(/[^0-9]/g,'');
+   
+    let nLog = nambString.length;
+    if (nLog===0){
+        return string+1;
+    }
+
+    nString = string.replace(nambString,'');
+    nambString = ''+(+nambString+1);
+    
+    if (nLog > nambString.length){
+        console.log(nLog-nambString.length);
+        nString = nString.padStart('0',nLog-nambString.length);
+    }
+    return nString+nambString;
+}
+
+console.log(sumStrings('foobar000'));
+console.log(sumStrings('foo099'));
