@@ -350,12 +350,57 @@ function sumStrings(string) {
     nString = string.replace(nambString,'');
     nambString = ''+(+nambString+1);
     
-    if (nLog > nambString.length){
-        console.log(nLog-nambString.length);
-        nString = nString.padStart('0',nLog-nambString.length);
+    if (nLog > nambString.length){   
+        nambString = nambString.padStart(nLog,'0');
     }
     return nString+nambString;
 }
 
 console.log(sumStrings('foobar000'));
 console.log(sumStrings('foo099'));
+
+// 14 
+// For seconds = 62, your function should return 
+//     "1 minute and 2 seconds"
+// * For seconds = 3662, your function should return
+//     "1 hour, 1 minute and 2 seconds"
+
+function formatDuration (seconds) {
+    // Complete this function
+    let y = 0,
+        month = 0,///??
+        d = 0,
+        h = 0,
+        m = 0,
+        s = 0,
+        secondLeft = seconds;
+  
+    y = Math.trunc(secondLeft/(365*24*60*60));   
+    if(y>0){secondLeft =secondLeft-(y*365*24*60*60)}
+    d = Math.trunc(secondLeft/(24*60*60));
+    if(d>0){secondLeft =secondLeft-(d*24*60*60)}   
+    h = Math.trunc(secondLeft/(60*60));
+    if(h>0){secondLeft =secondLeft-(h*60*60)}
+    m = Math.trunc(secondLeft/(60));
+    if(m>0){secondLeft =secondLeft-(m*60)};
+    s =  secondLeft;
+    y = y==0 ? '' : y==1? `${y} year` : `${y} years`;
+    d = d==0 ? '' : d==1? `${d} day` : `${d} days`;
+    h = h==0 ? '' : h==1? `${h} hour` : `${h} hours`;
+    m = m==0 ? '' : m==1? `${m} minute` : `${m} minutes`;
+    s = s==0 ? '' : s==1? `${s} second` : `${s} seconds`;
+
+
+     const arr = [y,d,h,m,s];
+     const myArr = arr.filter(element => element != '');
+     return myArr;
+    // return `${y=0 ? '' : y=1? 'year':'years'}${}
+    // `;
+}
+  
+console.log(formatDuration(1));//, "1 second");
+console.log(formatDuration(62));//, "1 minute and 2 seconds");
+console.log(formatDuration(120));//, "2 minutes");
+console.log(formatDuration(3600));//, "1 hour");
+console.log(formatDuration(3662));//, "1 hour, 1 minute and 2 seconds");
+console.log(formatDuration(365*24*60*60 +3435));//
