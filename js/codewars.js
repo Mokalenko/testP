@@ -390,7 +390,6 @@ function formatDuration (seconds) {
     m = m==0 ? '' : m==1? `${m} minute` : `${m} minutes`;
     s = s==0 ? '' : s==1? `${s} second` : `${s} seconds`;
 
-
      const arr = [y,d,h,m,s];
      const myArr = arr.filter(element => element != '');
      return myArr;
@@ -404,3 +403,186 @@ console.log(formatDuration(120));//, "2 minutes");
 console.log(formatDuration(3600));//, "1 hour");
 console.log(formatDuration(3662));//, "1 hour, 1 minute and 2 seconds");
 console.log(formatDuration(365*24*60*60 +3435));//
+
+// 15
+// Write an algorithm that will identify valid IPv4 addresses in dot-decimal format. IPs should be considered valid if they consist of four octets, with values between 0 and 255, inclusive.
+
+// Valid inputs examples:
+// Examples of valid inputs:
+// 1.2.3.4
+// 123.45.67.89
+// Invalid input examples:
+// 1.2.3
+// 1.2.3.4.5
+// 123.456.78.90
+// 123.045.067.089
+// Notes:
+// Leading zeros (e.g. 01.02.03.04) are considered invalid
+// Inputs are guaranteed to be a single string
+
+function isValidIP(str) {
+    const myArr = str.split('.');
+
+    if (myArr.length != 4){
+        return false;
+    }
+
+    let nambString = ''+str.replace(/[0-9]/g,'');
+    
+    if (nambString !='...'){
+        return false; 
+    }
+
+    for (let i = 0; i< myArr.length; i++){
+        if (myArr[i].length == 0){
+            return false;    
+        }
+         if (myArr[i].length > 1 && +myArr[i][0] == 0){
+            return false;    
+        }
+        if (+myArr[i] < 0 || +myArr[i] > 255){
+            return false;    
+        }
+    }
+
+    return true;   
+}
+
+// function isValidIP2(str) {
+// const net = require('net');
+// const isValidIP = (s) => net.isIP(s);
+// }
+
+// function isValidIP(str) {
+//     return new RegExp(
+//                "^(?:[1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])"
+//             +"\\.(?:[1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])"
+//             +"\\.(?:[1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])"
+//             +"\\.(?:[1-9]?[0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$").test(str);
+//   }
+
+console.log(isValidIP("197.156.251.")); // false);
+//   console.log(isValidIP("0.0.0.0")); // true);
+//   console.log(isValidIP("12.255.56.1")); // true);
+//   console.log(isValidIP("137.255.156.100")); // true);
+//   console.log(isValidIP('')); //false);
+//   console.log(isValidIP('abc.def.ghi.jkl')); //false);
+//   console.log(isValidIP('123.456.789.0')); //false);
+//   console.log(isValidIP('12.34.56')); //false);
+//   console.log(isValidIP('01.02.03.04')); //false);
+//   console.log(isValidIP('256.1.2.3')); //false);
+//   console.log(isValidIP('1.2.3.4.5')); //false);
+//   console.log(isValidIP('123,45,67,89')); //false);
+//   console.log(isValidIP('1e0.1e1.1e2.2e2')); //false);
+//   console.log(isValidIP(' 1.2.3.4')); //false);
+  console.log(isValidIP('1.2.3.4 ')); //false);
+  console.log(isValidIP('12.34.56.-7')); //false);
+  console.log(isValidIP('1.2.3.4\n')); //false);
+  console.log(isValidIP('\n1.2.3.4')); //false);
+
+
+//   16
+// Если n — числитель, а d — знаменатель дроби, эта дробь определяется как (сокращенная) правильная дробь тогда и только тогда, когда НОД (n, d) == 1.
+// Например 5/16, это правильная дробь, а 6/16нет, так как и 6, и 16 делятся на 2, поэтому дробь может быть уменьшена до 3/8.
+// Теперь, если рассмотреть заданное число d, сколько правильных дробей можно составить, используя d в качестве знаменателя?
+// Например, предположим, что d равно 15: с его помощью можно построить 8 различных правильных дробей от 0 до 1: 1/15, 2/15, 4/15, 7/15, 8/15, 11/15. , 13/15 и 14/15.
+// Вы должны построить функцию, которая вычисляет, сколько правильных дробей вы можете построить с заданным знаменателем:
+
+function properFractions(n){
+    // if (n===1){
+    //     return 0;
+    // }
+    // let res = 0;
+    // const myArr = [];
+    // let ind = 0;
+    // for (let i = 2; i <= n; i++){
+    //     if (n%i===0){
+    //         myArr[ind] = i;
+    //         ind++;
+    //     }
+    // }
+    // // console.log(myArr);
+    // for (let i = 1; i <= n; i++){ 
+    //     let correct = true;  
+    //     for (let j = 0; j<myArr.length;j++){
+    //         if (i%myArr[j]===0){
+    //            correct =false;
+    //           break;
+    //         }
+    //     }
+    //     if (correct){
+    //         res++;
+    //     }
+    // }
+    // return res;
+  if (n === 1) return 0;
+
+  let res = n, a = n;
+  for(let i = 2; i <= Math.sqrt(a); i++) {
+    if(a % i === 0) {
+      res = res / i * (i - 1);
+      while(a % i === 0) a /= i;
+    }
+  }
+
+  if(a > 1)
+    res = res / a * (a - 1)
+  
+  return res
+
+}
+console.log(properFractions(500000002));//==243900800
+// console.log(properFractions(0));//==0
+// console.log(properFractions(1));//==0
+// console.log(properFractions(2));//==1
+// console.log(properFractions(5));//==4
+// console.log(properFractions(15));//==8
+// // 1: 1/15, 2/15, 4/15, 7/15, 8/15, 11/15. , 13/15 и 14/15.
+// console.log(properFractions(25));//==20
+// console.log(properFractions(125));//==100
+
+// 17
+// Что такое анаграмма? Ну, два слова являются анаграммами друг друга, если они оба содержат одни и те же буквы. Например:
+// 'abba' & 'baab' == true
+// 'abba' & 'bbaa' == true
+// 'abba' & 'abbba' == false
+// 'abba' & 'abca' == false
+// Напишите функцию, которая найдет все анаграммы слова из списка. Вам будет дано два входа слово и массив со словами. Вы должны вернуть массив всех анаграмм или пустой массив, если их нет. Например:
+
+function anagrams(word, words){
+    let res = [];
+    let myObj ={
+    };
+    let it = 0;
+    for (i =0; i < word.length; i ++){
+        let re = new RegExp(word[i], 'g');
+        myObj[word[i]] = word.match(re).length;
+    }
+    
+    words.forEach((e)=>{
+        if(e.length ===word.length){
+        let correct = true; 
+        for (let key in myObj) {
+            let re = new RegExp(key, 'g');
+            let match = e.match(re);
+            if(match!=undefined){
+                if(myObj[key] != match.length){
+                correct = false; 
+                }
+            }else{
+                correct = false; 
+            }
+        }
+        if (correct){
+            res[it] = e;
+            it++;
+        }
+    }
+    });
+
+    return res;
+}
+console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']));
+console.log(anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']));// => ['aabb', 'bbaa']
+console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']));// => ['carer', 'racer']
+console.log(anagrams('laser', ['lazing', 'lazy',  'lacer']));// => []
