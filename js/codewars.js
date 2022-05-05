@@ -811,7 +811,7 @@ function createSpiral(n){
     }
     // 1 2 3 4 5 6 7 8 9
     let res = [];
-   
+    let flag = n%2==0;
     
     for (let i =0;i<n;i++){
         let res1 = [];
@@ -831,7 +831,16 @@ function createSpiral(n){
     v = n;
 
     for (let i =0;i<n*n;i++){
+        // res[arr1][arr2] = 1;
+       if(!flag){
+        if ( res[arr1] ==undefined){
+            break;
+        }
+        if ( res[arr1][arr2] ==undefined){
+            break;
+        }
         res[arr1][arr2] = 1;
+    }    
         if (--v == 0) 
 			{
                 v = Math.ceil(n * (dirChanges % 2) + n * ((dirChanges + 1) % 2) -(dirChanges / 2 - 1) - 2);
@@ -843,18 +852,29 @@ function createSpiral(n){
                 
                 if (dirChanges>2){
                     v = v-myI; 
-                    if (v == 0) {
+                    console.log(v);
+                    if (v <= 0) {
                         break;
                     } 
                     // console.log(v);
                     myInk++;
-                    if (myInk==2){
-                        myInk = 1;
-                        myI++;
+                    if (myInk%2==0){
+                       // myInk = 1;
+                         myI++;
                     }
                 }
 			}
-            
+          
+            if(flag){
+                if ( res[arr1] ==undefined){
+                    break;
+                }
+                if ( res[arr1][arr2] ==undefined){
+                    break;
+                }
+                res[arr1][arr2] = 1;
+            }   
+
         //    let next = fnext(res,v,n,dirChanges,arr2Plus, arr1Plus,arr1,arr2);
         // //    console.log(next);
         //     if (next==1){
@@ -875,7 +895,7 @@ function createSpiral(n){
  
     return res;
 }
-console.log(createSpiral(5));
+console.log(createSpiral(8));
 
 function fnext(res,v,n,dirChanges,arr2Plus, arr1Plus,arr1,arr2){
 //    console.log(res);
