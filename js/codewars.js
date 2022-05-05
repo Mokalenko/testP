@@ -586,3 +586,324 @@ console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']));
 console.log(anagrams('abba', ['aabb', 'abcd', 'bbaa', 'dada']));// => ['aabb', 'bbaa']
 console.log(anagrams('racer', ['crazer', 'carer', 'racar', 'caers', 'racer']));// => ['carer', 'racer']
 console.log(anagrams('laser', ['lazing', 'lazy',  'lacer']));// => []
+
+// 18
+// Вы умеете делать спираль? Давайте проверим это!
+// Классическое определение: Спираль — это кривая, исходящая из центральной точки и постепенно удаляющаяся по мере вращения вокруг этой точки.
+// Ваша цель — завершить функцию createSpiral(N), которая получает целое число Nи возвращает NxNдвумерный массив с числами , представленными 1в NxNвиде спирали по часовой стрелке.
+// Возвращает пустой массив, если он N < 1не Nявляется целым/числом
+
+// Примеры:
+
+// N = 3 Output: [[1,2,3],[8,9,4],[7,6,5]]
+
+// 1    2    3    
+// 8    9    4    
+// 7    6    5    
+
+function createSpiral(n){
+    if (!Number.isInteger(n) || n < 1){
+        return [];
+    }
+    // 1 2 3 4 5 6 7 8 9
+    let res = [];
+
+    for (let i =0;i<n;i++){
+        res[i] = [];
+    }
+
+    let arr1 = 0,
+     arr2 = 0,
+     arr1Plus = 0,
+     arr2Plus = 1,
+     dirChanges = 0,
+    v = n;
+
+    for (let i =0;i<n*n;i++){
+        res[arr1][arr2] = (i+1); 
+        if (--v == 0) 
+			{
+				v = Math.ceil(n * (dirChanges % 2) + n * ((dirChanges + 1) % 2) -(dirChanges / 2 - 1) - 2);
+                let temp = arr2Plus;
+				arr2Plus = -arr1Plus;
+				arr1Plus = temp;
+				dirChanges++;
+			}
+        arr2 +=arr2Plus;
+        arr1 +=arr1Plus;
+    }
+
+    return res;
+}
+
+console.log(createSpiral(3));
+
+//19 
+// Implement a function that receives two IPv4 addresses, and returns the number of addresses between them (including the first one, excluding the last one).
+// All inputs will be valid IPv4 addresses in the form of strings. The last address will always be greater than the first one.
+
+// Examples
+// * With input "10.0.0.0", "10.0.0.50"  => return   50 
+// * With input "10.0.0.0", "10.0.1.0"   => return  256 
+// * With input "20.0.0.10", "20.0.1.0"  => return  246
+
+function ipsBetween(start, end){
+   const arrCost = [BigInt(256*256*256)
+                ,BigInt(256*256)
+                ,BigInt(256)
+                ,BigInt(1)]; 
+    let sum1 = BigInt(0),
+        sum2 = BigInt(0);
+    start.split('.').forEach((item,i)=>{
+            sum1 += BigInt(+item)*BigInt(arrCost[i]);
+        }
+    );
+
+    end.split('.').forEach((item,i)=>{
+        sum2 += BigInt(item)*BigInt(arrCost[i]);
+        }
+    );
+
+    return +(BigInt(sum2) - BigInt(sum1)).toString();
+}
+
+console.log(ipsBetween("150.0.0.0", "150.0.0.1"));//, 1);
+console.log(ipsBetween("10.0.0.0", "10.0.0.50"));//, 50);
+console.log(ipsBetween("20.0.0.10", "20.0.1.0"));//, 246);
+console.log(ipsBetween("10.11.12.13", "10.11.13.0"));//, 243);
+console.log(ipsBetween("160.0.0.0", "160.0.1.0"));//, 256);
+console.log(ipsBetween("170.0.0.0", "170.1.0.0"));//, 65536);
+console.log(ipsBetween("50.0.0.0", "50.1.1.1"));//, 65793);
+console.log(ipsBetween("180.0.0.0", "181.0.0.0"));//, 16777216);
+console.log(ipsBetween("1.2.3.4", "5.6.7.8"));//, 67372036);
+console.log(ipsBetween("0.0.0.0", "255.255.255.255"));//, 2 ** 32 - 1);
+
+
+// 20
+// Улитка
+// Учитывая n x nмассив, вернуть элементы массива, расположенные от самых внешних элементов до среднего элемента, перемещаясь по часовой стрелке.
+
+// array = [[1,2,3],
+//          [4,5,6],
+//          [7,8,9]]
+// snail(array) #=> [1,2,3,6,9,8,7,4,5]
+
+function snail(array){
+
+    if (!Array.isArray( array )
+    || !Array.isArray( array[0] )
+    || array[0].length ==0){
+      return [];  
+    }
+
+    let res = [];
+    let n = array.length;
+     arr1 = 0,
+     arr2 = 0,
+     arr1Plus = 0,
+     arr2Plus = 1,
+     dirChanges = 0,
+    v = n;
+
+    for (let i =0;i<n*n;i++){
+        res[i] = array[arr1][arr2];
+        if (--v == 0) 
+			{
+				v = Math.ceil(n * (dirChanges % 2) + n * ((dirChanges + 1) % 2) -(dirChanges / 2 - 1) - 2);
+                let temp = arr2Plus;
+				arr2Plus = -arr1Plus;
+				arr1Plus = temp;
+				dirChanges++;
+			}
+        arr2 +=arr2Plus;
+        arr1 +=arr1Plus;
+    }
+    return res;
+}
+
+console.log(snail([[]]));
+
+console.log(snail([undefined ]));
+
+let array = [[1,2,3],
+          [4,5,6],
+          [7,8,9]];
+
+console.log(snail(array));
+
+
+// 21
+// Завершите решение так, чтобы оно удаляло весь текст, следующий за любым из переданных маркеров комментариев. Все пробелы в конце строки также должны быть удалены.
+
+// Пример:
+// Учитывая входную строку:
+
+// apples, pears # and bananas
+// grapes
+// bananas !apples
+// Ожидаемый результат будет следующим:
+
+// apples, pears
+// grapes
+// bananas
+
+function solution(input, markers){
+    const myArr = input.split('\n');
+    markers.forEach((e) => {
+        myArr.forEach((item,i) => {
+            let index = item.indexOf(e);
+            if(index >= 0){
+                myArr[i] = item.slice(0,index).trim();
+            }
+        });
+    });
+    return myArr.join('\n');
+}
+var result = solution("apples, pears # and bananas\ngrapes\nbananas !apples", ["#", "!"])
+// result should == "apples, pears\ngrapes\nbananas"
+console.log(result);
+
+// 22
+// We need to sum big numbers and we require your help.
+
+// Write a function that returns the sum of two numbers. The input numbers are strings and the function must return a string.
+
+// Example
+// add("123", "321"); -> "444"
+// add("11", "99");   -> "110"
+// Notes
+// The input numbers are big.
+// The input is a string of only digits
+// The numbers are positives
+
+function add(a, b) {
+    //   return (Number(a) + Number(b)).toString(); // Fix me!
+    //  return (BigInt(a) + BigInt(b)).toString(); в старой ноде не работает!
+    var n = Math.max(a.length, b.length)
+
+    a = a.padStart(n, 0)
+    b = b.padStart(n, 0)
+  
+    var res = Array(n), d = 0
+  
+    for (var q=n-1; ~q; --q) {
+      if ((res[q] = d + +a[q] + +b[q]) > 9) {
+        d = 1, res[q] -= 10;
+      } else {
+        d = 0;
+      }
+    }
+    
+    if (d) {
+      res.unshift(1)
+    }
+    
+    return res.join("");
+}
+
+console.log(add('63829983432984289347293874', '90938498237058927340892374089'));
+//, "91002328220491911630239667963")
+
+// 23
+function createSpiral(n){
+    if (!Number.isInteger(n) || n < 1){
+        return [];
+    }
+    // 1 2 3 4 5 6 7 8 9
+    let res = [];
+   
+    
+    for (let i =0;i<n;i++){
+        let res1 = [];
+        for (let j =0;j<n;j++){
+            res1[j] = 0;
+        }
+        res[i] = res1;
+    }
+
+    let arr1 = 0,
+     arr2 = 0,
+     arr1Plus = 0,
+     arr2Plus = 1,
+     myI = 1,
+     myInk = 0,
+     dirChanges = 0,
+    v = n;
+
+    for (let i =0;i<n*n;i++){
+        res[arr1][arr2] = 1;
+        if (--v == 0) 
+			{
+                v = Math.ceil(n * (dirChanges % 2) + n * ((dirChanges + 1) % 2) -(dirChanges / 2 - 1) - 2);
+                let temp = arr2Plus;
+				arr2Plus = -arr1Plus;
+				arr1Plus = temp;
+				dirChanges++;
+                // console.log(dirChanges);
+                
+                if (dirChanges>2){
+                    v = v-myI; 
+                    if (v == 0) {
+                        break;
+                    } 
+                    // console.log(v);
+                    myInk++;
+                    if (myInk==2){
+                        myInk = 1;
+                        myI++;
+                    }
+                }
+			}
+            
+        //    let next = fnext(res,v,n,dirChanges,arr2Plus, arr1Plus,arr1,arr2);
+        // //    console.log(next);
+        //     if (next==1){
+        //         res[arr1][arr2] = 0;
+        //     }else{
+            // if ( res[arr1] ==undefined){
+            //     // break;
+            // }
+            // if ( res[arr1][arr2] ==undefined){
+            //     // break;
+            // }
+            //     res[arr1][arr2] = 1;
+            // }
+            // console.log(res[arr1]); 
+        arr2 +=arr2Plus;
+        arr1 +=arr1Plus;
+    }
+ 
+    return res;
+}
+console.log(createSpiral(5));
+
+function fnext(res,v,n,dirChanges,arr2Plus, arr1Plus,arr1,arr2){
+//    console.log(res);
+
+    // if (--v <= 0) 
+    // {
+    //     // v = Math.ceil(n * (dirChanges % 2) + n * ((dirChanges + 1) % 2) -(dirChanges / 2 - 1) - 2);
+        
+    //     // let temp = arr2Plus;
+    //     // arr2Plus = -arr1Plus;
+    //     // arr1Plus = temp;
+    //     // dirChanges++;
+    //     v = Math.ceil(n * (dirChanges % 2) + n * ((dirChanges + 1) % 2) -(dirChanges / 2 - 1) - 2);
+    //             let temp = arr2Plus*2;
+	// 			arr2Plus = -arr1Plus*2;
+	// 			arr1Plus = temp;
+	// 			dirChanges++;
+
+    // }else{
+        arr2Plus =arr2Plus*2;
+        arr1Plus =arr1Plus*2;  
+    // }
+    arr2 +=arr2Plus;
+    arr1 +=arr1Plus;
+    console.log(res);
+    // console.log(res[arr1]);
+    console.log(`res[arr1] ${res[arr1]} // arr1 ${arr1} arr2 ${arr2}// v ${v}`);
+    return res[arr1]==undefined ? 0:res[arr1][arr2];
+}
+
+console.log(createSpiral(6));

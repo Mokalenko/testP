@@ -28,7 +28,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
       slides.forEach((item) => item.style.display = 'none');
 
-      slides[slideIndex - 1].style.display = 'block'; // Как ваша самостоятельная работа - переписать на использование классов show/hide
+      slides[slideIndex - 1].style.display = 'block'; 
       
       if (slides.length < 10) {
           current.textContent =  `0${slideIndex}`;
