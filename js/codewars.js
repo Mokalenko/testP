@@ -927,3 +927,69 @@ function fnext(res,v,n,dirChanges,arr2Plus, arr1Plus,arr1,arr2){
 }
 
 console.log(createSpiral(6));
+
+const arr = [5, 6, 11, 20, 3];
+ 
+const result = arr.reduce((sum, curr) => sum + curr, 10);
+console.log(result);
+
+const arr = [
+    {
+        name: 'Alex',
+        salary: 500
+    },
+    {
+        name: 'Ann',
+        salary: 1500
+    },
+    {
+        name: 'John',
+        salary: 2500
+    },
+];
+ 
+const result = arr.map(item => Object.entries(item)[1][1]).reduce((sum, curr) => sum + curr)
+console.log(result);
+
+const promisify = (item, delay) =>
+    new Promise(resolve => setTimeout(() => resolve(item), delay));
+ 
+const a = () => promisify('a', 100);
+const b = () => promisify('b', 5000);
+const c = () => promisify('c', 3000);
+ 
+async function two() {
+    const promises = [a(), b(), c()];
+    const outpu1 = await Promise.race(promises);
+    return `two is done: ${outpu1}`;
+}
+ 
+two().then(console.log);
+
+const promisify = (item, delay) =>
+    new Promise(resolve => setTimeout(() => resolve(item), delay));
+ 
+const a = () => promisify('a', 100);
+const b = () => promisify('b', 5000);
+const c = () => promisify('c', 3000);
+ 
+async function three() {
+    const outpu1 = await a();
+    const outpu2 = await b();
+    const outpu3 = await c();
+    return `three is done: ${outpu1} ${outpu2} ${outpu3}`
+}
+ 
+three().then(console.log);
+
+const FCC = "freeCodeCamp"; // Change this line
+let fact = "is cool!"; // Change this line
+fact = "is awesome!";
+console.log(FCC, fact); // Change this line
+
+let lastNameLength = 0;
+const lastName = "Lovelace";
+
+// Only change code below this line
+// lastNameLength = lastName.length;
+// console.log(
