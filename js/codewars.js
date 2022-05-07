@@ -1027,4 +1027,164 @@ two().then(console.log);
 //         return "No";
 //       }
       
+
+// function orderMyLogic(val) {
+//     if (val < 5) {
+//       return "Less than 5";
+//     } else if (val < 10) {
+//       return "Less than 10";
+//     } else {
+//       return "Greater than or equal to 10";
+//     }
+//   }
+  
+//   console.log(orderMyLogic(4));
 //       console.log( testLogicalAnd(25));
+
+// let count = 0;
+
+// function cc(card) {
+//   // Only change code below this line
+//   if(card === 2 || card === 3 || card === 4 || card === 5 || card === 6){
+//     count ++;
+//   }
+
+//   console.log(card);
+// if(card === 10 || card =='J' || card == 'Q' || card =='K' || card == 'А'){
+    
+//     count --;
+//   }
+
+// if (count <=0){
+//   return ""+count+" Hold";
+// }else{
+//   return ""+count+" Bet";
+// }
+//   // Only change code above this line
+// }
+
+// // console.log(cc(2));
+// // console.log(cc(3));
+// // console.log(cc(7));
+// console.log(cc('K'));
+// console.log(cc('A'));
+
+// const recordCollection = {
+//     2548: {
+//       albumTitle: 'Slippery When Wet',
+//       artist: 'Bon Jovi',
+//       tracks: ['Let It Rock', 'You Give Love a Bad Name']
+//     },
+//     2468: {
+//       albumTitle: '1999',
+//       artist: 'Prince',
+//       tracks: ['1999', 'Little Red Corvette']
+//     },
+//     1245: {
+//       artist: 'Robert Palmer',
+//       tracks: []
+//     },
+//     5439: {
+//       albumTitle: 'ABBA Gold'
+//     }
+//   };
+// //   delete
+//   // Only change code below this line
+//   function updateRecords(records, id, prop, value) {
+//     if(value ===''){
+//       delete records[id][prop];
+//     }else{
+//       if (prop =='tracks'){
+//           if (records[id][prop]==undefined){
+//             records[id][prop] = [value];
+//           }else{
+//         records[id][prop].push(value) ;
+//           }
+//       }else{
+//       records[id][prop] = value;
+//       }
+//     }
+//     return records;
+//   }
+//   updateRecords(recordCollection, 2468, "tracks", "");
+//   console.log(recordCollection);
+
+// function sum(arr, n) {
+//     // Only change code below this line
+//   if (n <= 0) {
+//         return 0;
+//       } else {
+//         return sum(arr, n - 1) + arr[n - 1];
+//       }
+//     // Only change code above this line
+//   }
+
+//   console.log(sum([2, 3, 4, 5], 3));
+
+const contacts = [
+    {
+      firstName: "Akira",
+      lastName: "Laine",
+      number: "0543236543",
+      likes: ["Pizza", "Coding", "Brownie Points"],
+    },
+    {
+      firstName: "Harry",
+      lastName: "Potter",
+      number: "0994372684",
+      likes: ["Hogwarts", "Magic", "Hagrid"],
+    },
+    {
+      firstName: "Sherlock",
+      lastName: "Holmes",
+      number: "0487345643",
+      likes: ["Intriguing Cases", "Violin"],
+    },
+    {
+      firstName: "Kristian",
+      lastName: "Vos",
+      number: "unknown",
+      likes: ["JavaScript", "Gaming", "Foxes"],
+    },
+  ];
+  
+  function lookUpProfile(name, prop) {
+    // Only change code below this line
+    let myObj = undefined;
+    contacts.forEach((obj)=>{
+        if (obj.firstName === name){
+            myObj = obj; 
+        }
+    });
+
+    if (myObj == undefined){
+        return 'No such contact';
+    }
+
+    if(myObj[prop]== undefined){
+        return 'No such property';  
+    }
+
+    return myObj[prop];
+    // Only change code above this line
+  };
+  
+  console.log(lookUpProfile("Akira", "likes"));
+
+  function checkEqual(a, b) {
+    return (a === b ? "Equal" : "Not Equal");
+  }
+  
+  console.log(checkEqual(1, 2));
+
+  function countdown(n){
+    if (n < 1) {
+      return [];
+    } else {
+      const countArray = countdown(n - 1);
+      countArray.push(n);
+      return countArray.reverse();
+    }
+  }
+
+  console.log(countdown(10));
