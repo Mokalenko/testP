@@ -966,30 +966,65 @@ async function two() {
  
 two().then(console.log);
 
-const promisify = (item, delay) =>
-    new Promise(resolve => setTimeout(() => resolve(item), delay));
+// const promisify = (item, delay) =>
+//     new Promise(resolve => setTimeout(() => resolve(item), delay));
  
-const a = () => promisify('a', 100);
-const b = () => promisify('b', 5000);
-const c = () => promisify('c', 3000);
+// const a = () => promisify('a', 100);
+// const b = () => promisify('b', 5000);
+// const c = () => promisify('c', 3000);
  
-async function three() {
-    const outpu1 = await a();
-    const outpu2 = await b();
-    const outpu3 = await c();
-    return `three is done: ${outpu1} ${outpu2} ${outpu3}`
-}
+// async function three() {
+//     const outpu1 = await a();
+//     const outpu2 = await b();
+//     const outpu3 = await c();
+//     return `three is done: ${outpu1} ${outpu2} ${outpu3}`
+// }
  
-three().then(console.log);
+// three().then(console.log);
 
-const FCC = "freeCodeCamp"; // Change this line
-let fact = "is cool!"; // Change this line
-fact = "is awesome!";
-console.log(FCC, fact); // Change this line
+// const FCC = "freeCodeCamp"; // Change this line
+// let fact = "is cool!"; // Change this line
+// fact = "is awesome!";
+// console.log(FCC, fact); // Change this line
 
-let lastNameLength = 0;
-const lastName = "Lovelace";
+// let lastNameLength = 0;
+// const lastName = "Lovelace";
 
-// Only change code below this line
-// lastNameLength = lastName.length;
-// console.log(
+// // Only change code below this line
+// // lastNameLength = lastName.length;
+// // console.log(
+
+//     function nextInLine(arr, item) {
+//         // Only change code below this line
+//         if (arr.length ==0){
+//          arr.push(item);
+//          return item; 
+//         }
+//         let myItewm = arr[0]; 
+//         arr.push(item);
+//         arr.shift();
+//         return myItewm;
+//         // Only change code above this line
+//       }
+      
+//       // Setup
+//       const testArr = [1, 2, 3, 4, 5];
+      
+//       // Display code
+//       console.log(nextInLine([], 5));
+//       console.log("Before: " + JSON.stringify(testArr));
+//       console.log(nextInLine(testArr, 6));
+//       console.log("After: " + JSON.stringify(testArr));
+
+//       function testLogicalAnd(val) {
+//         // Only change code below this line
+      
+      
+//           if (val > 24 && val < 51) {
+//             return "Yes";
+//           }
+//         // Only change code above this line
+//         return "No";
+//       }
+      
+//       console.log( testLogicalAnd(25));
