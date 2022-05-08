@@ -108,24 +108,56 @@ function rot13(str) {
 // 555 555 5555
 // 5555555555
 // 1 555 555 5555
-
+// ^\(*\+*[1-9]{0,3}\)*-*[1-9]{0,3}[-. /]*\(*[2-9]\d{2}\)*[-. /]*\d{3}[-. /]*\d{4} *e*x*t*\.* *\d{0,4}$
 function telephoneCheck(str) {
-    let res = false;
-    if (/\d{3}-\d{3}-\d{3}/.test(str)){
-        res = true; 
-    }else if (/(\d{3})\d{3}-\d{3}/.test(str)){
-        res = true;
-    }else if (/(\d{3}) \d{3}-\d{3}/.test(str)){
-        res = true;
-    }else if (/\d{3} \d{3}-\d{3}/.test(str)){
-        res = true;
-    }else if (/\d{10}/.test(str)){
-        res = true;
-    }else if (/1 \d{3} \d{3} \d{3}/.test(str)){
-        res = true;
+    // let res = false;
+    // if (/(1\s)?\d{3}[-\s]\d{3}[-\s]\d{3}/.test(str)){
+    //     res = true; 
+    // }
+    // else if (/[()]\d{3}[)](\s)?\d{3}-\d{3}/.test(str)){
+    //     res = true;
+    // }else if (/[(]\d{3}[)\s]\d{3}[-]\d{3}/.test(str)){
+    //     res = true;
+    // }else if (/\d{3}[\s]\d{3}-\d{3}/.test(str)){
+    //     res = true;
+    // }else if (/\d{10}/.test(str)){
+    //     res = true;
+   
+        
+    // }
+    if ((str.indexOf('(') !=-1 && str.indexOf(')') ==-1)
+    || (str.indexOf('(') ==-1 && str.indexOf(')') !=-1)){
+        return false;
     }
-    return res;
+    let phoneTest = new RegExp(/^((\+1)|1)? ?\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})( ?(ext\.? ?|x)(\d*))?$/);
+
+    let phone = str.trim();
+    let results = phoneTest.exec(phone);
+   if (results !== null && results.length > 8) {
+       return true;
+   }
+   else {
+        return false;
+   }
+
   }
-  
+  console.log(telephoneCheck("1 555)555-5555"));
+  console.log(telephoneCheck("2 555 555 5555"));
   console.log(telephoneCheck("555-555-5555"));
+  console.log(telephoneCheck("(555) 555-5555"));
   console.log(telephoneCheck("555-555"));
+  console.log(telephoneCheck("1 (555) 555-5555")); //должны вернуть true.
+  console.log(telephoneCheck("(555)555-5555")); //должен вернуться true.
+  console.log(telephoneCheck("1 (555)555-5555")); //должен вернуться true.
+
+  function checkScope() {
+    let i = 'function scope';
+    if (true) {
+      i = 'block scope';
+      console.log('Block scope i is: ', i);
+    }
+    console.log('Function scope i is: ', i);
+    return i;
+  }
+
+  console.log(checkScope());

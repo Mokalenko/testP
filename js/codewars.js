@@ -1177,14 +1177,26 @@ const contacts = [
   
   console.log(checkEqual(1, 2));
 
-  function countdown(n){
-    if (n < 1) {
-      return [];
+  function countdown(n,i=1){
+    if (n <= i) {
+      return [n];
     } else {
-      const countArray = countdown(n - 1);
-      countArray.push(n);
-      return countArray.reverse();
+      const countArray = countdown(n, i+1);
+      countArray.push(i);
+      return countArray;
     }
   }
 
-  console.log(countdown(10));
+  console.log(countdown(5));
+
+  function rangeOfNumbers(startNum, endNum) {
+    if (startNum >= endNum) {
+        return [startNum];
+      } else {
+        const countArray = rangeOfNumbers(startNum, endNum-1);
+        countArray.push(endNum);
+        return countArray;
+      }
+  };
+
+  console.log(rangeOfNumbers(1, 5));
